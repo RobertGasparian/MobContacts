@@ -9,9 +9,6 @@ public class Contact {
     private String phone;
     private int image;
 
-    public Contact(){
-
-    }
 
     public Contact(String name, String phone, int image) {
         this.name = name;

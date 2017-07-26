@@ -39,7 +39,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
         Contact contact=contactList.get(position);
         holder.name.setText(contact.getName());
         holder.phone.setText(contact.getPhone());
-        holder.avater.setImageResource(contact.getImage());
+        holder.avatar.setImageResource(contact.getImage());
 
     }
 
@@ -53,14 +53,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
 
         TextView name;
         TextView phone;
-        ImageView avater;
+        ImageView avatar;
         RelativeLayout itemLayout;
 
         public ContactHolder(View itemView) {
             super(itemView);
             name=(TextView)itemView.findViewById(R.id.contact_name);
             phone=(TextView)itemView.findViewById(R.id.contact_phone);
-            avater=(ImageView)itemView.findViewById(R.id.contact_avatar);
+            avatar =(ImageView)itemView.findViewById(R.id.contact_avatar);
             itemLayout=(RelativeLayout)itemView.findViewById(R.id.item_layout);
         }
     }
