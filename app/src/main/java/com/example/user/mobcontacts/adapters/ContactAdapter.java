@@ -1,8 +1,24 @@
 package com.example.user.mobcontacts.adapters;
 
-/**
- * Created by User on 7/26/2017.
- */
 
-public class ContactAdapter {
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ContactAdapter  {
+
+
+    class ContactHolder extends RecyclerView.ViewHolder{
+
+
+        TextView name;
+        TextView phone;
+        ImageView avater;
+
+        public ContactHolder(View itemView) {
+            super(itemView);
+        }
+    }
 }
