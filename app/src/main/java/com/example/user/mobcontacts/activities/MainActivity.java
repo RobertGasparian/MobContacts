@@ -14,7 +14,8 @@ import com.example.user.mobcontacts.fragments.ContactsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int fragmetnIndex=-1;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment=new ContactsFragment();
         FragmentManager fragmentManager=getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.main_fragment,fragment).commit();
-        fragmetnIndex=1;
 
     }
 
@@ -38,10 +38,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add:
-                Fragment fragment=new AddFragment();
+                Fragment fragment=AddFragment.newInstance(0,null,null,0,0,1);
                 FragmentManager fragmentManager=getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.main_fragment,fragment).commit();
-                fragmetnIndex=2;
+                fragmentManager.beginTransaction().replace(R.id.main_fragment,fragment).addToBackStack("").commit();
                 return true;
 
             default:
@@ -49,16 +48,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if(fragmetnIndex==2){
-            Fragment fragment=new ContactsFragment();
-            FragmentManager fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_fragment,fragment).commit();
-            fragmetnIndex=1;
-        }else{
-            super.onBackPressed();
-        }
 
-    }
 }

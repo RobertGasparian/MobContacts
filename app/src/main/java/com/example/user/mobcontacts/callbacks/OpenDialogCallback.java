@@ -6,5 +6,5 @@ package com.example.user.mobcontacts.callbacks;
 
 public interface OpenDialogCallback {
 
-     void openDialog(int position);
+     void openDialog(int position, String name, String phone, int age, int gender);
 }

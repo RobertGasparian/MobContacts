@@ -56,9 +56,9 @@ public class ContactsFragment extends Fragment implements OpenDialogCallback{
     }
 
     @Override
-    public void openDialog(int position) {
+    public void openDialog(int position, String name, String phone, int age, int gender) {
         FragmentManager fragmentManager=getFragmentManager();
-        MenuDialogFragment dialogFragment=new MenuDialogFragment();
+        MenuDialogFragment dialogFragment=MenuDialogFragment.newInstance(position,name,phone,age,gender);
         dialogFragment.show(fragmentManager,"Dialog Fragment");
     }
 

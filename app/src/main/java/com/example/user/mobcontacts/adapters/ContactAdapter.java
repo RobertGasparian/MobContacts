@@ -51,7 +51,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
         holder.itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                dialogCallback.openDialog(position);
+                dialogCallback.openDialog(position,contact.getName(),contact.getPhone(),contact.getAge(),contact.getImage());
                 return false;
             }
         });
