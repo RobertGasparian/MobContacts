@@ -8,11 +8,13 @@ public class Contact {
     private String name;
     private String phone;
     private int image;
+    private int age;
 
 
-    public Contact(String name, String phone, int image) {
+    public Contact(String name, String phone,int age, int image) {
         this.name = name;
         this.phone = phone;
+        this.age=age;
         this.image = image;
     }
 
@@ -38,5 +40,13 @@ public class Contact {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

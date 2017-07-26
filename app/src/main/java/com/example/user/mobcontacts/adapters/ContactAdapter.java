@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.user.mobcontacts.R;
+import com.example.user.mobcontacts.callbacks.OpenDialogCallback;
 import com.example.user.mobcontacts.models.Contact;
-
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactHolder>  {
@@ -21,10 +20,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
 
     private List<Contact> contactList;
     private Context context;
+    private OpenDialogCallback dialogCallback;
 
     public ContactAdapter(List<Contact> contactList, Context context) {
         this.contactList = contactList;
         this.context = context;
+
     }
 
     @Override
@@ -34,12 +35,26 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
     }
 
     @Override
-    public void onBindViewHolder(ContactHolder holder, int position) {
+    public void onBindViewHolder(ContactHolder holder, final int position) {
 
-        Contact contact=contactList.get(position);
+        final Contact contact=contactList.get(position);
         holder.name.setText(contact.getName());
         holder.phone.setText(contact.getPhone());
-        holder.avatar.setImageResource(contact.getImage());
+        holder.age.setText(String.valueOf(contact.getAge()));
+
+        if(contact.getImage()==1){
+            holder.avatar.setImageResource(R.drawable.male);
+        }
+        else{
+            holder.avatar.setImageResource(R.drawable.female);
+        }
+        holder.itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                dialogCallback.openDialog(position);
+                return false;
+            }
+        });
 
     }
 
@@ -53,6 +68,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
 
         TextView name;
         TextView phone;
+        TextView age;
         ImageView avatar;
         RelativeLayout itemLayout;
 
@@ -61,7 +77,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
             name=(TextView)itemView.findViewById(R.id.contact_name);
             phone=(TextView)itemView.findViewById(R.id.contact_phone);
             avatar =(ImageView)itemView.findViewById(R.id.contact_avatar);
+            age=(TextView)itemView.findViewById(R.id.contact_age);
             itemLayout=(RelativeLayout)itemView.findViewById(R.id.item_layout);
         }
+    }
+
+    public void setDialogCallback(OpenDialogCallback dialogCallback) {
+        this.dialogCallback = dialogCallback;
     }
 }

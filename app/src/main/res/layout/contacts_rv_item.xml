@@ -17,27 +17,39 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="7dp"
+        android:layout_toLeftOf="@+id/contact_age"
         android:layout_toRightOf="@id/contact_avatar"
-        android:text="Name"
         android:ellipsize="end"
         android:maxLines="1"
+        android:text="Name"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/contact_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/contact_phone"
-        android:layout_toRightOf="@id/contact_avatar"
+        android:layout_below="@id/contact_name"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="7dp"
-        android:layout_below="@id/contact_name"
-        android:textSize="18sp"
+        android:layout_toLeftOf="@+id/contact_age"
+        android:layout_toRightOf="@id/contact_avatar"
         android:text="+374-55-55-55-55"
-        />
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/contact_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:text="15"
+        android:textSize="25dp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary" />
 
 </RelativeLayout>
