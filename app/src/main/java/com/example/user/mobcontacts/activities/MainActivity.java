@@ -1,11 +1,18 @@
 package com.example.user.mobcontacts.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.user.mobcontacts.R;
 import com.example.user.mobcontacts.fragments.AddFragment;
@@ -14,15 +21,35 @@ import com.example.user.mobcontacts.fragments.ContactsFragment;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
+    private final int STORAGE_ACCESS = 1;
+    private boolean PERMISSION_GRANTED=false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ContactsFragment fragment =ContactsFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment, fragment).commit();
 
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_ACCESS);
+            } else {
+                ContactsFragment fragment = ContactsFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, fragment).commit();
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(PERMISSION_GRANTED){
+            ContactsFragment fragment = ContactsFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, fragment).commit();
+        }
     }
 
     @Override
@@ -45,5 +72,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        switch (requestCode) {
+
+            case STORAGE_ACCESS:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    PERMISSION_GRANTED=true;
+
+                } else {
+                    Toast.makeText(this, getString(R.string.read_permission), Toast.LENGTH_LONG).show();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 4500);
+                }
+
+        }
+
+    }
 }

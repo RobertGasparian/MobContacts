@@ -8,9 +8,10 @@
     </string-array>
     <string name="Edit">Edit</string>
     <string name="Add">Add</string>
+    <string name="read_permission">Can not download data from phone\'s storage. Please give permission for reading data from external storage.</string>
+    <string name="write_permission">Can not write data on phone\'s storage. Please give permission for writing data on external storage.</string>
 
     <string-array name="menu_dialog">
-        <item>---</item>
         <item>Edit</item>
         <item>Delete</item>
     </string-array>

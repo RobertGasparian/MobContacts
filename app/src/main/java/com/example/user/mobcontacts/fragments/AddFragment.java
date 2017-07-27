@@ -1,9 +1,15 @@
 package com.example.user.mobcontacts.fragments;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.example.user.mobcontacts.R;
 import com.example.user.mobcontacts.helpers.DBHelper;
 import com.example.user.mobcontacts.utilities.ValidationUtility;
@@ -32,9 +39,10 @@ public class AddFragment extends Fragment {
     private ArrayAdapter spinnerAdapter;
     public final static int ADD_MODE = 0;
     public final static int EDIT_MODE = 1;
+    public final static int WRITE_ACCESS = 2;
     private int DEFAULT_MODE = ADD_MODE;
     private int id;
-    public final static String ID="id", MODE="mode";
+    public final static String ID = "id", MODE = "mode";
     private String name, phone;
     private int age, gender;
 
@@ -77,8 +85,9 @@ public class AddFragment extends Fragment {
                             genderSpinner.getSelectedItemPosition())) {
 
                         DBHelper dbHelper = new DBHelper(getContext());
-                        if (DEFAULT_MODE == 0) {
 
+
+                        if (DEFAULT_MODE == 0) {
                             dbHelper.addContact(new Contact(nameEdit.getText().toString(),
                                     phoneEdit.getText().toString(),
                                     Integer.parseInt(ageEdit.getText().toString()),
@@ -98,6 +107,7 @@ public class AddFragment extends Fragment {
                         FragmentManager fragmentManager = getFragmentManager();
                         ContactsFragment contactsFragment = new ContactsFragment();
                         fragmentManager.beginTransaction().replace(R.id.main_fragment, contactsFragment).commit();
+
 
                     } else {
                         Toast.makeText(getContext(), R.string.field_empty_toast, Toast.LENGTH_SHORT).show();
@@ -160,4 +170,7 @@ public class AddFragment extends Fragment {
 
         }
     }
+
+
 }
+
