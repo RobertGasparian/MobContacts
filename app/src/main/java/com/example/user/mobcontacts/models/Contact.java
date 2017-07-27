@@ -1,21 +1,33 @@
 package com.example.user.mobcontacts.models;
 
 
-
 public class Contact {
 
 
     private String name;
     private String phone;
-    private int image;
+    private int gender;
     private int age;
+    private int id;
 
 
-    public Contact(String name, String phone,int age, int image) {
+    public Contact(String name, String phone, int age, int gender) {
+
         this.name = name;
         this.phone = phone;
-        this.age=age;
-        this.image = image;
+        this.age = age;
+        this.gender = gender;
+
+    }
+
+    public Contact(int id, String name, String phone, int age, int gender) {
+
+        this.name = name;
+        this.phone = phone;
+        this.age = age;
+        this.gender = gender;
+        this.id = id;
+
     }
 
     public String getName() {
@@ -34,12 +46,12 @@ public class Contact {
         this.phone = phone;
     }
 
-    public int getImage() {
-        return image;
+    public int getGender() {
+        return gender;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public int getAge() {
@@ -48,5 +60,13 @@ public class Contact {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

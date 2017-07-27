@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">MobContacts</string>
+    <string name="field_empty_toast">Please fill all fields.</string>
     <string-array name="gender">
         <item>---</item>
         <item>Male</item>
         <item>Female</item>
+    </string-array>
+    <string name="Edit">Edit</string>
+    <string name="Add">Add</string>
+
+    <string-array name="menu_dialog">
+        <item>---</item>
+        <item>Edit</item>
+        <item>Delete</item>
     </string-array>
 </resources>

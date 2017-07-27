@@ -27,6 +27,7 @@
         android:layout_below="@id/phone_edit"
         android:layout_marginTop="15dp"
         android:hint="Enter age..."
+        android:maxLength="3"
         android:inputType="phone" />
 
     <Spinner
