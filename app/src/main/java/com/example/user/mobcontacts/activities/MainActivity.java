@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +16,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.user.mobcontacts.R;
-import com.example.user.mobcontacts.fragments.AddFragment;
+import com.example.user.mobcontacts.fragments.AddEditFragment;
 import com.example.user.mobcontacts.fragments.ContactsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
     private final int STORAGE_ACCESS = 1;
-    private boolean PERMISSION_GRANTED=false;
+    private boolean PERMISSION_GRANTED = false;
 
 
     @Override
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_ACCESS);
             } else {
-                ContactsFragment fragment = ContactsFragment.newInstance();
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, fragment).commit();
+                if (savedInstanceState == null) {
+                    ContactsFragment fragment = ContactsFragment.newInstance();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, fragment).commit();
+                }
             }
         }
     }
@@ -46,9 +49,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(PERMISSION_GRANTED){
-            ContactsFragment fragment = ContactsFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, fragment).commit();
+        if (PERMISSION_GRANTED) {
+
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            if (fragmentManager.getBackStackEntryCount() == 0) {
+                ContactsFragment fragment = ContactsFragment.newInstance();
+                fragmentManager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
+            }
+
         }
     }
 
@@ -63,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                Fragment fragment = AddFragment.newInstance(AddFragment.ADD_MODE);
+                Fragment fragment = AddEditFragment.newInstance(AddEditFragment.ADD_MODE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, fragment).addToBackStack(TAG).commit();
                 return true;
 
@@ -81,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    PERMISSION_GRANTED=true;
+                    PERMISSION_GRANTED = true;
 
                 } else {
                     Toast.makeText(this, getString(R.string.read_permission), Toast.LENGTH_LONG).show();

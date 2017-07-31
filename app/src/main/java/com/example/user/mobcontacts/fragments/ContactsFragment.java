@@ -51,10 +51,7 @@ public class ContactsFragment extends Fragment implements OpenDialogCallback {
 
 
     private List<Contact> getData() {
-
-        DBHelper dbHelper = new DBHelper(getContext());
-        List<Contact> contacts = dbHelper.getAllContacts();
-        return contacts;
+        return new DBHelper(getContext()).getAllContacts();
 
     }
 

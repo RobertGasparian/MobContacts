@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pager_discription"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="disctiption" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pager_image"
+        android:layout_below="@id/pager_discription"
+        android:layout_marginTop="5dp"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/pager_edit_buttons"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pager_edit"
+            android:background="@color/transparent"
+            android:src="@drawable/edit"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pager_delete"
+            android:background="@color/transparent"
+            android:src="@drawable/delete"/>
+    </LinearLayout>
+
+</RelativeLayout>

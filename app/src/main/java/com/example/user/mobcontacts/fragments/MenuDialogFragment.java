@@ -3,6 +3,7 @@ package com.example.user.mobcontacts.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class MenuDialogFragment extends DialogFragment {
     public static MenuDialogFragment newInstance(int id){
         MenuDialogFragment menuDialogFragment=new MenuDialogFragment();
         Bundle args=new Bundle();
-        args.putInt(AddFragment.ID,id);
+        args.putInt(AddEditFragment.ID,id);
         menuDialogFragment.setArguments(args);
         return menuDialogFragment;
     }
@@ -39,7 +40,7 @@ public class MenuDialogFragment extends DialogFragment {
 
         View view=inflater.inflate(R.layout.menu_dialog_fragment,container,false);
         ListView listView=(ListView)view.findViewById(R.id.menu_lv);
-        ID=getArguments().getInt(AddFragment.ID);
+        ID=getArguments().getInt(AddEditFragment.ID);
         String[] items=getResources().getStringArray(R.array.menu_dialog);
         final ArrayAdapter<String> adapter=new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,items);
         listView.setAdapter(adapter);
@@ -51,15 +52,20 @@ public class MenuDialogFragment extends DialogFragment {
                 switch (position){
 
                     case 0:
-                        AddFragment addFragment=AddFragment.newInstance(ID, AddFragment.EDIT_MODE);
+                        AddEditFragment addEditFragment = AddEditFragment.newInstance(ID, AddEditFragment.EDIT_MODE);
                         FragmentManager fragmentManager=getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.main_fragment,addFragment).addToBackStack(TAG).commit();
+                        fragmentManager.beginTransaction().replace(R.id.main_fragment, addEditFragment).addToBackStack(TAG).commit();
                         dismiss();
                         break;
                     case 1:
                         DBHelper dbHelper=new DBHelper(getContext());
                         dbHelper.deleteContact(ID);
-                        ((ContactsFragment)getTargetFragment()).updateContactList();
+
+                        Fragment targetFragment = getTargetFragment();
+                        if (targetFragment instanceof ContactsFragment) {
+                            ((ContactsFragment) targetFragment).updateContactList();
+                        }
+
                         dismiss();
                         break;
                 }

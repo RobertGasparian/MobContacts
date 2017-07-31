@@ -10,9 +10,19 @@
     <string name="Add">Add</string>
     <string name="read_permission">Can not download data from phone\'s storage. Please give permission for reading data from external storage.</string>
     <string name="write_permission">Can not write data on phone\'s storage. Please give permission for writing data on external storage.</string>
-
+    <string name="camera_permission_deny">Cannot connect to camera. Please set camera permission for application.</string>
+    <string name="enter_discription">Enter discription...</string>
+    <string name="ok">Ok</string>
+    <string name="picture_requierment">Please upload at least 1 picture with discription</string>
+    <string name="more_than_size">You cant add more than 5 pictures</string>
     <string-array name="menu_dialog">
         <item>Edit</item>
         <item>Delete</item>
+    </string-array>
+
+    <string-array name="url_array">
+        <item>https://www.w3schools.com/css/img_fjords.jpg</item>
+        <item>https://www.w3schools.com/css/img_mountains.jpg</item>
+        <item>https://www.w3schools.com/css/img_mountains.jpg</item>
     </string-array>
 </resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/name_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter name..."
+        android:maxLines="1" />
+
+    <EditText
+        android:id="@+id/phone_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_edit"
+        android:layout_marginTop="15dp"
+        android:hint="Enter phone..."
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/age_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_edit"
+        android:layout_marginTop="15dp"
+        android:hint="Enter age..."
+        android:inputType="phone"
+        android:maxLength="3" />
+
+    <Spinner
+        android:id="@+id/gender_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/age_edit"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:id="@+id/add_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add"
+        android:textAllCaps="false" />
+
+    <LinearLayout
+        android:id="@+id/upload_buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/age_edit"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/camera_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/camera_24dp" />
+
+        <ImageButton
+            android:id="@+id/gallery_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gallery_24dp" />
+
+        <ImageButton
+            android:id="@+id/url_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/url_24dp" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_test"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/age_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/path_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/add_edit_button"
+        android:ellipsize="start"
+        android:text="..."
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/disc_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/path_text"
+        android:ellipsize="start"
+        android:text="..."
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/size"
+        android:layout_below="@id/gender_spinner"
+        android:textSize="20dp"/>
+
+</RelativeLayout>
