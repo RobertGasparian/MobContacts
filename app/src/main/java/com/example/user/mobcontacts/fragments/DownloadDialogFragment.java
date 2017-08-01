@@ -29,7 +29,6 @@ public class DownloadDialogFragment extends DialogFragment
     private Button ok, cancel;
 
 
-
     public static DownloadDialogFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -47,7 +46,7 @@ public class DownloadDialogFragment extends DialogFragment
         View view = inflater.inflate(R.layout.download_dialog_fragment, container, false);
 
         spinner = (Spinner) view.findViewById(R.id.url_spinner);
-        url_disc=(EditText)view.findViewById(R.id.url_disc);
+        url_disc = (EditText) view.findViewById(R.id.url_disc);
         ok = (Button) view.findViewById(R.id.ok_button);
         cancel = (Button) view.findViewById(R.id.cancel_button);
 
@@ -66,12 +65,14 @@ public class DownloadDialogFragment extends DialogFragment
         switch (id) {
 
             case R.id.ok_button:
-                if(!url_disc.getText().toString().isEmpty()) {
-                    String url = spinner.getSelectedItem().toString();
-                    SaveImageAsync saveImageAsync = new SaveImageAsync(getContext(), this);
-                    saveImageAsync.execute(url);
-                }else{
-                    Toast.makeText(getContext(),R.string.enter_discription,Toast.LENGTH_SHORT).show();
+                if (!url_disc.getText().toString().isEmpty()) {
+                    if (spinner.getSelectedItemPosition() != 0) {
+                        String url = spinner.getSelectedItem().toString();
+                        SaveImageAsync saveImageAsync = new SaveImageAsync(getContext(), this);
+                        saveImageAsync.execute(url);
+                    }
+                } else {
+                    Toast.makeText(getContext(), R.string.enter_discription, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.cancel_button:
@@ -83,7 +84,7 @@ public class DownloadDialogFragment extends DialogFragment
     @Override
     public void getDownloadedPath(String path) {
 
-        ((AddEditFragment)getTargetFragment()).setURLtoPath(path,url_disc.getText().toString());
+        ((AddEditFragment) getTargetFragment()).setURLtoPath(path, url_disc.getText().toString());
         dismiss();
 
     }

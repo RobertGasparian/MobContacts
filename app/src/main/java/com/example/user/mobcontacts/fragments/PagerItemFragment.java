@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,36 +16,33 @@ import android.widget.TextView;
 import com.example.user.mobcontacts.R;
 import com.example.user.mobcontacts.helpers.DBHelper;
 import com.example.user.mobcontacts.models.ContactImage;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by User on 7/31/2017.
  */
 
-public class PagerItemFragment extends Fragment {
+public class PagerItemFragment extends Fragment{
+
+
+    private final String TAG = getClass().getSimpleName();
 
     private TextView pagerDiscription;
     private ImageView pagerImage;
     private ImageButton edit_pager, delete_pager;
+    private final static int REQUEST_CODE=55;
     private final static String ID = "id";
     private final static String CONTACT_ID = "contact_id";
     private final static String PATH = "path";
     private final static String DISCRIPTION = "discription";
-    private int contact_id;
     private int id;
-    private String path;
-    private String discription;
 
 
-    public static PagerItemFragment newInstance(ContactImage image) {
+
+    public static PagerItemFragment newInstance(int image_id) {
 
         Bundle args = new Bundle();
-        args.putInt(ID, image.getId());
-        args.putInt(CONTACT_ID, image.getContact_id());
-        args.putString(PATH, image.getPath());
-        args.putString(DISCRIPTION, image.getDiscription());
+        args.putInt(ID, image_id);
         PagerItemFragment fragment = new PagerItemFragment();
         fragment.setArguments(args);
         return fragment;
@@ -54,25 +52,55 @@ public class PagerItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pager_item, container, false);
+
         if (getArguments() != null) {
             id = getArguments().getInt(ID);
-            contact_id = getArguments().getInt(CONTACT_ID);
-            path = getArguments().getString(PATH);
-            discription = getArguments().getString(DISCRIPTION);
         }
+
+        DBHelper dbHelper=new DBHelper(getContext());
+        ContactImage image=dbHelper.getImage(id);
+
         pagerDiscription = (TextView) view.findViewById(R.id.pager_discription);
         pagerImage = (ImageView) view.findViewById(R.id.pager_image);
         edit_pager = (ImageButton) view.findViewById(R.id.pager_edit);
         delete_pager = (ImageButton) view.findViewById(R.id.pager_delete);
-        pagerDiscription.setText(discription);
+        pagerDiscription.setText(image.getDiscription());
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = BitmapFactory.decodeFile(path, options);
+        options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+        Bitmap bitmap = BitmapFactory.decodeFile(image.getPath(), options);
         pagerImage.setImageBitmap(bitmap);
-        //TODO: picasso
+//        Picasso.with(getContext())
+//                .load(path)
+//                .into(pagerImage);
 
+        edit_pager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                EditImageDialogFragment dialogFragment = EditImageDialogFragment.newInstance(id);
+                dialogFragment.setTargetFragment(PagerItemFragment.this,REQUEST_CODE);
+                dialogFragment.show(fragmentManager, TAG);
+            }
+        });
+
+        delete_pager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(getContext());
+                dbHelper.deleteImage(id);
+                updateDetailedFragment();
+            }
+        });
 
         return view;
 
     }
+
+    public void updateDetailedFragment(){
+
+        ((DetailedFragment)getFragmentManager().findFragmentByTag("ContactsFragment")).updateFragment();
+    }
+
+
+
 }

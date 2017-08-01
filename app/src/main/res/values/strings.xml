@@ -15,14 +15,17 @@
     <string name="ok">Ok</string>
     <string name="picture_requierment">Please upload at least 1 picture with discription</string>
     <string name="more_than_size">You cant add more than 5 pictures</string>
+    <string name="empty_disc">Discription field is empty, please fill it</string>
     <string-array name="menu_dialog">
         <item>Edit</item>
         <item>Delete</item>
     </string-array>
 
     <string-array name="url_array">
+        <item>...</item>
         <item>https://www.w3schools.com/css/img_fjords.jpg</item>
         <item>https://www.w3schools.com/css/img_mountains.jpg</item>
-        <item>https://www.w3schools.com/css/img_mountains.jpg</item>
+        <item>https://www.w3schools.com/css/img_lights.jpg</item>
+        <item>https://www.smashingmagazine.com/wp-content/uploads/2015/06/10-dithering-opt.jpg</item>
     </string-array>
 </resources>

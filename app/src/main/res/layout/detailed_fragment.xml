@@ -17,21 +17,19 @@
         android:id="@+id/detailed_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/detailed_name"
+        android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="phone"
-        android:textSize="25sp"
-        android:layout_below="@id/detailed_name"
-        android:layout_marginTop="10dp"/>
+        android:textSize="25sp" />
 
     <android.support.v4.view.ViewPager
+        android:id="@+id/image_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/image_pager"
         android:layout_below="@+id/detailed_phone"
-        android:layout_marginTop="15dp"
-        />
-
+        android:layout_marginTop="15dp" />
 
 
 </RelativeLayout>

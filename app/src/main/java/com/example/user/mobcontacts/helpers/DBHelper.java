@@ -221,8 +221,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_IMAGES, new String[]{_ID, CONTACT_ID, PATH, DISCRIPTION}, CONTACT_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
         while (cursor.moveToNext()) {
-            ContactImage contactImage = new ContactImage(cursor.getInt(cursor.getColumnIndex(DBHelper._ID)),
-                    cursor.getInt(cursor.getColumnIndex(DBHelper.CONTACT_ID)),
+            ContactImage contactImage = new ContactImage(cursor.getInt(cursor.getColumnIndex(DBHelper.CONTACT_ID)),
+                    cursor.getInt(cursor.getColumnIndex(DBHelper._ID)),
                     cursor.getString(cursor.getColumnIndex(DBHelper.PATH)),
                     cursor.getString(cursor.getColumnIndex(DBHelper.DISCRIPTION)));
             contactList.add(contactImage);
@@ -234,7 +234,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public int updateContact(ContactImage contactImage) {
+    public int updateContactImage(ContactImage contactImage) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

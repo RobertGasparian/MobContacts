@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.user.mobcontacts.R;
+import com.example.user.mobcontacts.callbacks.DetailedCallback;
 import com.example.user.mobcontacts.callbacks.OpenDialogCallback;
 import com.example.user.mobcontacts.models.Contact;
 
@@ -21,6 +22,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
     private List<Contact> contactList;
     private Context context;
     private OpenDialogCallback dialogCallback;
+    private DetailedCallback detailedCallback;
 
     public ContactAdapter(List<Contact> contactList, Context context) {
 
@@ -50,6 +52,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
         } else {
             holder.avatar.setImageResource(R.drawable.female);
         }
+
+        holder.itemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detailedCallback.openDetailedFragment(contact.getId());
+            }
+        });
+
         holder.itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -91,6 +101,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
 
         this.dialogCallback = dialogCallback;
 
+    }
+
+    public void setDetailedCallback(DetailedCallback detailedCallback) {
+        this.detailedCallback = detailedCallback;
     }
 
     public void updateList(List<Contact> list) {

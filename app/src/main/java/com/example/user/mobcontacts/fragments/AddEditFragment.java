@@ -60,7 +60,6 @@ public class AddEditFragment extends Fragment implements View.OnClickListener {
     public final static int CAMERA_ACCESS = 7;
     public final static int CAMERA_RESULT = 8;
     public final static int GALLERY_RESULT = 9;
-    public final static int URL_RESULT = 10;
     private int DEFAULT_MODE = ADD_MODE;
     private int id;
     public final static String ID = "id", MODE = "mode";

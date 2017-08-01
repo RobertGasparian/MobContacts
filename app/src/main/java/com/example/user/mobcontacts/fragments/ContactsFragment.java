@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.user.mobcontacts.R;
 import com.example.user.mobcontacts.adapters.ContactAdapter;
+import com.example.user.mobcontacts.callbacks.DetailedCallback;
 import com.example.user.mobcontacts.callbacks.OpenDialogCallback;
 import com.example.user.mobcontacts.helpers.DBHelper;
 import com.example.user.mobcontacts.models.Contact;
 import java.util.List;
 
 
-public class ContactsFragment extends Fragment implements OpenDialogCallback {
+public class ContactsFragment extends Fragment implements OpenDialogCallback, DetailedCallback {
 
     private final String TAG = getClass().getSimpleName();
 
@@ -44,6 +45,7 @@ public class ContactsFragment extends Fragment implements OpenDialogCallback {
         List<Contact> contactList = getData();
         adapter = new ContactAdapter(contactList, getContext());
         adapter.setDialogCallback(this);
+        adapter.setDetailedCallback(this);
         recyclerView.setAdapter(adapter);
         return view;
 
@@ -69,6 +71,15 @@ public class ContactsFragment extends Fragment implements OpenDialogCallback {
     public void updateContactList() {
 
         adapter.updateList(getData());
+
+    }
+
+    @Override
+    public void openDetailedFragment(int contact_id) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        DetailedFragment fragment = DetailedFragment.newInstance(contact_id);
+        fragmentManager.beginTransaction().replace(R.id.main_fragment, fragment,TAG).addToBackStack(TAG).commit();
 
     }
 }

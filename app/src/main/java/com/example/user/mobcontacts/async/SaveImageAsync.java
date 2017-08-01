@@ -36,6 +36,7 @@ public class SaveImageAsync extends AsyncTask<String, String, String> {
         downloadedPath = getDownloadedPath;
     }
 
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -109,6 +110,7 @@ public class SaveImageAsync extends AsyncTask<String, String, String> {
 
 
             downloadedPath.getDownloadedPath(s);
+
         }
     }
 }
